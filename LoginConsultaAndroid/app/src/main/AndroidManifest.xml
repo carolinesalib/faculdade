@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.root.loginconsultaandroid">
+    <service android:name=".mostraCadastro"></service>
 
     <application
         android:allowBackup="true"
@@ -15,9 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HomeActivity"></activity>
         <activity
-            android:name=".MainActivityMenu"
-            android:label="@string/title_activity_main_activity_menu"
+            android:name=".CadastroActivity"
+            android:label="@string/title_activity_cadastro"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

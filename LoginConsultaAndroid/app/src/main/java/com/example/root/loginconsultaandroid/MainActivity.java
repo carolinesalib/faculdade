@@ -3,11 +3,14 @@ package com.example.root.loginconsultaandroid;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
 
@@ -42,20 +45,13 @@ public class MainActivity extends Activity implements OnClickListener {
         pass = ((EditText) findViewById(R.id.editTextPass)).getText().toString();
 
         if (user.equals("admin") && pass.equals("admin")) {
+            Intent it = new Intent(this, HomeActivity.class);
+            startActivity(it);
 
         } else {
-            new AlertDialog.Builder(this)
-                    .setTitle("Erro ao logar")
-                    .setMessage("Não foi possível efetuar o login")
-                    .setPositiveButton(
-                    "Yes",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
+            Toast toast = Toast.makeText(this,"Usuário ou senha incorretos!", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
         }
     }
 }
