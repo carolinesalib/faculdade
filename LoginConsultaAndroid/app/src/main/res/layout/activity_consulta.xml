@@ -26,12 +26,10 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
+            android:layout_height="match_parent"
             android:id="@+id/editTextNome"
-            android:capitalize="characters"
-            android:contextClickable="false" />
+            android:editable="false"
+            android:enabled="false" />
 
     </LinearLayout>
 
@@ -49,10 +47,11 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/editTextIdade" />
+            android:layout_height="match_parent"
+            android:id="@+id/editTextIdade"
+            android:editable="false"
+            android:enabled="false" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -65,13 +64,14 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Sexo"
-            android:id="@+id/textView4" />
+            android:id="@+id/labelSexo" />
 
-        <Spinner
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinnerSexo"
-            android:spinnerMode="dropdown" />
+            android:layout_height="match_parent"
+            android:id="@+id/editTextSexo"
+            android:editable="false"
+            android:enabled="false" />
 
     </LinearLayout>
 
@@ -79,7 +79,6 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp">
 
         <TextView
@@ -96,7 +95,9 @@
             android:layout_gravity="right"
             android:max="150"
             android:progress="0"
-            android:indeterminate="false" />
+            android:indeterminate="false"
+            android:editable="false"
+            android:enabled="false"  />
 
     </LinearLayout>
 
@@ -105,14 +106,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Teu pai te ama?"
-            android:id="@+id/checkBox"
-            android:checked="false"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     </LinearLayout>
 
     <LinearLayout
@@ -123,8 +123,8 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Salvar"
-            android:id="@+id/buttonSalvar" />
+            android:text="Voltar"
+            android:id="@+id/buttonSair" />
     </LinearLayout>
 
 </LinearLayout>

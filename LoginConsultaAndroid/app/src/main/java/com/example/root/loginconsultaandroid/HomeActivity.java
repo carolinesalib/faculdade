@@ -17,7 +17,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
-        setReferences();
         inicializar();
     }
 
