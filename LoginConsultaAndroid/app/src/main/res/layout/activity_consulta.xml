@@ -97,22 +97,24 @@
             android:progress="0"
             android:indeterminate="false"
             android:editable="false"
+            android:enabled="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teu pai te ama?"
+            android:id="@+id/checkBoxPergunta"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:editable="false"
             android:enabled="false"  />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
     </LinearLayout>
 
     <LinearLayout

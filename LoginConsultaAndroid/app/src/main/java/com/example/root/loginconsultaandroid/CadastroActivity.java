@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -21,6 +22,7 @@ public class CadastroActivity extends Activity implements AdapterView.OnItemSele
     private EditText editIdade;
     private Spinner spinnerSexo;
     private SeekBar seekBarPeso;
+    private CheckBox checkboxPergunta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +54,12 @@ public class CadastroActivity extends Activity implements AdapterView.OnItemSele
 
 
     private void setReferences() {
-        buttonSalvar = (Button) findViewById(R.id.buttonSalvar);
-        editNome = (EditText) findViewById(R.id.editTextNome);
-        editIdade = (EditText) findViewById(R.id.editTextIdade);
-        spinnerSexo = (Spinner) findViewById(R.id.spinnerSexo);
-        seekBarPeso = (SeekBar) findViewById(R.id.seekBarPeso);
+        buttonSalvar     = (Button)findViewById(R.id.buttonSalvar);
+        editNome         = (EditText)findViewById(R.id.editTextNome);
+        editIdade        = (EditText)findViewById(R.id.editTextIdade);
+        spinnerSexo      = (Spinner)findViewById(R.id.spinnerSexo);
+        seekBarPeso      = (SeekBar)findViewById(R.id.seekBarPeso);
+        checkboxPergunta = (CheckBox)findViewById(R.id.checkBox);
     }
 
     private void setEvents() {
@@ -79,6 +82,7 @@ public class CadastroActivity extends Activity implements AdapterView.OnItemSele
             it.putExtra("idade", editIdade.getText().toString());
             it.putExtra("sexo", spinnerSexo.getSelectedItem().toString());
             it.putExtra("peso", seekBarPeso.getProgress());
+            it.putExtra("pergunta", checkboxPergunta.isChecked());
             startActivity(it);
         }
 

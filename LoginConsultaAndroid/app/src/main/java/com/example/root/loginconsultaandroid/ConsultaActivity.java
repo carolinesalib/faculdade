@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
@@ -15,6 +16,7 @@ public class ConsultaActivity extends Activity implements View.OnClickListener {
     private EditText textIdade;
     private EditText textSexo;
     private SeekBar seekBarPeso;
+    private CheckBox checkboxPergunta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,10 @@ public class ConsultaActivity extends Activity implements View.OnClickListener {
         if (bundle.containsKey("peso")) {
             seekBarPeso.setProgress(bundle.getInt("peso"));
         }
+
+        if (bundle.containsKey("pergunta")) {
+            checkboxPergunta.setChecked(bundle.getBoolean("pergunta"));
+        }
     }
 
     private void inicializar() {
@@ -53,6 +59,7 @@ public class ConsultaActivity extends Activity implements View.OnClickListener {
         textIdade = (EditText) findViewById(R.id.editTextIdade);
         textSexo = (EditText) findViewById(R.id.editTextSexo);
         seekBarPeso = (SeekBar) findViewById(R.id.seekBarPeso);
+        checkboxPergunta = (CheckBox) findViewById(R.id.checkBoxPergunta);
     }
 
     private void setEvents() {
