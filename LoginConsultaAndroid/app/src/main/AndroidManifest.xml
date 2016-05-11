@@ -31,10 +31,7 @@
         <service
             android:name=".ConsultaService"
             android:enabled="true"
-            android:exported="false" />
-        <service
-            android:name=".ConsultaIntentService"
-            android:exported="false"></service>
+            android:exported="true" />
     </application>
 
 </manifest>

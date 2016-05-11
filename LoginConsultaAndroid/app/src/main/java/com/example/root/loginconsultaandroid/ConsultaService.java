@@ -33,11 +33,12 @@ public class ConsultaService extends IntentService {
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setContentText(text);
         builder.setContentIntent(pi);
+        builder.setAutoCancel(true);
         notificationManager.notify(1, builder.build());
     }
 
     protected void createNotification() {
-        pi = PendingIntent.getActivity(this, 0, new Intent(this, CadastroActivity.class), 0);
+        pi = PendingIntent.getActivity(this, 0, new Intent(this, CadastroActivity.class), Intent.FLAG_ACTIVITY_NEW_TASK);
         notification = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Cadastro PDM")
