@@ -21,7 +21,7 @@ public class CadastroService extends Service {
     public void onCreate() {
         PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(this, CadastroActivity.class), 0);
         Notification notification = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_icon_example)
                 .setContentTitle("Cadastro PDM")
                 .setContentText("Toque aqui para cadastrar.")
                 .setContentIntent(pi)

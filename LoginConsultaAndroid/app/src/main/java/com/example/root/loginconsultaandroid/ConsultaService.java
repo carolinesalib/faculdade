@@ -30,7 +30,7 @@ public class ConsultaService extends IntentService {
     protected void updateNotification(String text) {
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(getApplicationContext());
-        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setSmallIcon(R.mipmap.ic_icon_example);
         builder.setContentText(text);
         builder.setContentIntent(pi);
         builder.setAutoCancel(true);
@@ -38,9 +38,9 @@ public class ConsultaService extends IntentService {
     }
 
     protected void createNotification() {
-        pi = PendingIntent.getActivity(this, 0, new Intent(this, CadastroActivity.class), Intent.FLAG_ACTIVITY_NEW_TASK);
+        pi = PendingIntent.getActivity(this, 0, new Intent(this, CadastroActivity.class), 0);
         notification = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_icon_example)
                 .setContentTitle("Cadastro PDM")
                 .setContentText("Toque aqui para visualizar.")
                 .setContentIntent(pi)
