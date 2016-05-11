@@ -75,7 +75,6 @@ public class CadastroActivity extends Activity implements AdapterView.OnItemSele
 
     @Override
     public void onClick(View v) {
-
         if (v.getId() == R.id.buttonSalvar) {
             Intent it = new Intent(this, ConsultaActivity.class);
             it.putExtra("nome", editNome.getText().toString());
@@ -84,6 +83,15 @@ public class CadastroActivity extends Activity implements AdapterView.OnItemSele
             it.putExtra("peso", seekBarPeso.getProgress());
             it.putExtra("pergunta", checkboxPergunta.isChecked());
             startActivity(it);
+
+            Intent intentNotification = new Intent(this, ConsultaService.class);
+            intentNotification.putExtra("nome", editNome.getText().toString());
+            intentNotification.putExtra("idade", editIdade.getText().toString());
+            intentNotification.putExtra("sexo", spinnerSexo.getSelectedItem().toString());
+            intentNotification.putExtra("peso", seekBarPeso.getProgress());
+            intentNotification.putExtra("pergunta", checkboxPergunta.isChecked());
+            startService(intentNotification);
+
         }
 
     }

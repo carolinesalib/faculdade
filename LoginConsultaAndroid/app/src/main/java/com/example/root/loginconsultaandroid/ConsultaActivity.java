@@ -27,6 +27,8 @@ public class ConsultaActivity extends Activity implements View.OnClickListener {
 
         Bundle bundle = getIntent().getExtras();
 
+        if (bundle == null) return;
+
         if (bundle.containsKey("nome")){
             textNome.setText(bundle.getString("nome"));
         }

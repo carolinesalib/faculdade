@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.root.loginconsultaandroid">
-    <service android:name=".mostraCadastro"></service>
+
+    <service android:name=".mostraCadastro" />
 
     <application
         android:allowBackup="true"
@@ -16,12 +17,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity"></activity>
-        <activity android:name=".ConsultaActivity"></activity>
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".ConsultaActivity" />
         <activity
             android:name=".CadastroActivity"
             android:label="@string/title_activity_cadastro"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".CadastroService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".ConsultaService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name=".ConsultaIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

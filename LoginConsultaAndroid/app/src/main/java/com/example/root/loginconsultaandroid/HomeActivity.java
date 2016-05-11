@@ -35,10 +35,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
-//        startService(new Intent(CadastroActivity.this, AbreCadastro.class));
-
         if (v.getId() == R.id.buttonCadastro) {
+
             Intent it = new Intent(this, CadastroActivity.class);
             startActivity(it);
         }
