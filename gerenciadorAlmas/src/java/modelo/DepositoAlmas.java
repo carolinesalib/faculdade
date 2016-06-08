@@ -180,5 +180,39 @@ public class DepositoAlmas {
         return alma;
     }
 
-    public void removeAlma(Integer id){}
+    public void removeAlma(Integer id){
+        PreparedStatement stmt = null;
+        Connection connection = getConnection();
+        try {
+            String sql = "DELETE FROM gerenciador.almas WHERE id = ?";
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            int result = stmt.executeUpdate();
+            if (result == 1) {
+                System.out.println("Excluído com sucesso.");
+            } else {
+                System.out.println("Problemas com a exclusão.");
+            }
+        } catch (SQLException e) {
+            //Lança a exception para outra camada tratar.
+            System.err.println(e.getMessage());
+        } finally {
+            if(stmt != null) {
+                try {
+                    stmt.close();
+                } catch(SQLException e) {
+                    //Lança a exception para outra camada tratar.
+                    System.err.println(e.getMessage());
+                }
+            }
+            if(connection != null) {
+                try {
+                    connection.close();
+                } catch(SQLException e) {
+                    //Lança a exception para outra camada tratar.
+                    System.err.println(e.getMessage());
+                }
+            }	
+        }
+    }
 }

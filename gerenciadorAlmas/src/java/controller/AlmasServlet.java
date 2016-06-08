@@ -25,7 +25,7 @@ public class AlmasServlet extends HttpServlet {
             jsp = processaCadastro(request, response, deposito);
         }else if(request.getRequestURI().endsWith("/editaAlma")){
             jsp = processaEdita(request, response, deposito);
-        }else if(request.getRequestURI().endsWith("/removeAlma")){
+        }else if(request.getRequestURI().endsWith("/excluirAlma")){
             jsp = processaRemove(request, response, deposito);
         }else if(request.getRequestURI().endsWith("/salvaAlma")){
             jsp = processaSalvar(request, response, deposito);
@@ -53,7 +53,7 @@ public class AlmasServlet extends HttpServlet {
     private String processaRemove(HttpServletRequest request, HttpServletResponse response, DepositoAlmas deposito){
         String id = request.getParameter("id");
         deposito.removeAlma(Integer.parseInt(id));
-        return null;
+        return "/listaAlmas";
     }
     
     private String processaSalvar(HttpServletRequest request, HttpServletResponse response, DepositoAlmas deposito){

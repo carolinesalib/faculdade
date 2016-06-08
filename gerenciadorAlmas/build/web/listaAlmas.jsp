@@ -12,6 +12,7 @@
                 <th>Nome</th>
                 <th>Status</th>
                 <th>Pecado</th>
+                <th>Ações</th>
             </tr>
             <c:if test="${empty resultadoBusca}">
                 <tr>
@@ -23,6 +24,9 @@
                 <td><a href="editaAlma?id=${alma.id}">${alma.nome}</a></td>
                 <td>${alma.status == 1 ? "Céu" : "Inferno"}</td>
                 <td>${alma.pecado}</td>
+                <td><a class="btn btn-primary btn-xs glyphicon glyphicon-pencil" href="editaAlma?id=${alma.id}" role="button"></a>
+                    <a class="btn btn-danger btn-xs glyphicon glyphicon-trash" href="excluirAlma?id=${alma.id}" role="button"></a>
+                </td>
                 </tr>
             </c:forEach>
         </table>

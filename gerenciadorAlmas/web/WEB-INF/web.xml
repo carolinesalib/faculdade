@@ -18,7 +18,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Almas</servlet-name>
-        <url-pattern>/removeAlma</url-pattern>
+        <url-pattern>/excluirAlma</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Almas</servlet-name>
