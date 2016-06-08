@@ -14,6 +14,8 @@ public class AlmasServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+ response.setContentType("text/html; charset=UTF-8");
+ response.setCharacterEncoding("UTF-8");
         
         DepositoAlmas deposito = (DepositoAlmas) request.getSession().getAttribute("deposito");
         if(deposito == null){
@@ -74,13 +76,16 @@ public class AlmasServlet extends HttpServlet {
     }
     
     private String processaLista(HttpServletRequest request, HttpServletResponse response, DepositoAlmas deposito){
-//        String nome = request.getParameter("nome");
+        String texto = request.getParameter("texto");
+        
+        System.out.println(texto);
+        
         List resultado = null;
-//        if(nome == null || nome.trim().length() == 0){
+        if(texto == null || texto.trim().length() == 0){
             resultado = deposito.getAllAlmas();
-//        }else{
-//            resultado = deposito.listaContatos(nome);
-//        }
+        }else{
+            resultado = deposito.getAlmas(texto);
+        }
         request.setAttribute("resultadoBusca", resultado);
         return "/listaAlmas.jsp";
     }

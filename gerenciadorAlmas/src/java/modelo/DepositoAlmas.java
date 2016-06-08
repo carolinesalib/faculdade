@@ -16,7 +16,7 @@ public class DepositoAlmas {
         Connection connection = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/gerenciador", "root", "1234");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/gerenciador?useUnicode=true&characterEncoding=UTF-8", "root", "1234");
         } catch (ClassNotFoundException e) {
             System.out.println("ERRO: " + e.getMessage());
         } catch (SQLException e) {
@@ -110,6 +110,46 @@ public class DepositoAlmas {
         try {
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM gerenciador.almas;");
+            while (rs.next()) {
+                Alma alma = new Alma();
+                alma.setId(rs.getInt("id"));
+                alma.setNome(rs.getString("nome"));
+                alma.setStatus(rs.getInt("status"));
+                alma.setPecado(rs.getString("pecado"));
+                almas.add(alma);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if(stmt != null) {
+                try {
+                    stmt.close();
+                } catch(SQLException e) {
+                    //Lança a exception para outra camada tratar.
+                    System.err.println(e.getMessage());
+                }
+            }
+            if(connection != null) {
+                try {
+                    connection.close();
+                } catch(SQLException e) {
+                    //Lança a exception para outra camada tratar.
+                    System.err.println(e.getMessage());
+                }
+            }	
+        }
+
+        return almas;
+    }
+    
+    public List<Alma> getAlmas(String nome) {
+        List<Alma> almas = new ArrayList<Alma>();
+        Connection connection = getConnection();
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM gerenciador.almas WHERE nome like ?;");
+            stmt.setString(1, "%" + nome + "%");
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Alma alma = new Alma();
                 alma.setId(rs.getInt("id"));
