@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,8 +14,7 @@ public class AlmasServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
- 
+        
         DepositoAlmas deposito = (DepositoAlmas) request.getSession().getAttribute("deposito");
         if(deposito == null){
             deposito = new DepositoAlmas();
@@ -24,7 +22,7 @@ public class AlmasServlet extends HttpServlet {
         }
         String jsp = null;
         if(request.getRequestURI().endsWith("/cadastroAlma")){
-            jsp = processaNovo(request, response, deposito);
+            jsp = processaCadastro(request, response, deposito);
         }else if(request.getRequestURI().endsWith("/editaAlma")){
             jsp = processaEdita(request, response, deposito);
         }else if(request.getRequestURI().endsWith("/removeAlma")){
@@ -36,27 +34,20 @@ public class AlmasServlet extends HttpServlet {
         }
         
         if(jsp == null){
-            response.sendRedirect(request.getContextPath() + "/listaAlmas");
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
         }else{
             request.getRequestDispatcher(jsp).forward(request, response);
         }
     }
     
-    private String processaNovo(HttpServletRequest request, HttpServletResponse response, DepositoAlmas deposito){
+    private String processaCadastro(HttpServletRequest request, HttpServletResponse response, DepositoAlmas deposito){   
         return "/cadastroAlma.jsp";
     }
     
     private String processaEdita(HttpServletRequest request, HttpServletResponse response, DepositoAlmas deposito){
-        Alma alma = new Alma();
+        request.setAttribute("alma", deposito.getAlmaId(Integer.parseInt(request.getParameter("id"))));
         
-        alma.setId(Integer.parseInt(request.getParameter("id")));
-        alma.setNome(request.getParameter("nome").toString());
-        alma.setPecado(request.getParameter("pecado").toString());
-        alma.setStatus(Integer.parseInt(request.getParameter("status")));
-        
-//        deposito.editaAlma(alma);
-        
-        return "/listaAlmas";
+        return "/editaAlma.jsp";
     }
 
     private String processaRemove(HttpServletRequest request, HttpServletResponse response, DepositoAlmas deposito){
@@ -66,26 +57,30 @@ public class AlmasServlet extends HttpServlet {
     }
     
     private String processaSalvar(HttpServletRequest request, HttpServletResponse response, DepositoAlmas deposito){
-        
         Alma alma = new Alma();
         
         alma.setNome(request.getParameter("nome").toString());
         alma.setPecado(request.getParameter("pecado").toString());
         alma.setStatus(Integer.parseInt(request.getParameter("status")));
         
-        deposito.insereAlma(alma);
+        if (request.getParameter("id") != null) {
+            alma.setId(Integer.parseInt(request.getParameter("id")));
+            deposito.editaAlma(alma);
+        } else {
+            deposito.insereAlma(alma);
+        }
         
         return "/listaAlmas";
     }
     
     private String processaLista(HttpServletRequest request, HttpServletResponse response, DepositoAlmas deposito){
-        String nome = request.getParameter("nome");
+//        String nome = request.getParameter("nome");
         List resultado = null;
-        if(nome == null || nome.trim().length() == 0){
-//            resultado = deposito.listaContatos();
-        }else{
+//        if(nome == null || nome.trim().length() == 0){
+            resultado = deposito.getAllAlmas();
+//        }else{
 //            resultado = deposito.listaContatos(nome);
-        }
+//        }
         request.setAttribute("resultadoBusca", resultado);
         return "/listaAlmas.jsp";
     }

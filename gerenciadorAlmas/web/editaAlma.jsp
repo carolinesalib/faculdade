@@ -13,21 +13,27 @@
             <form action="salvaAlma" method="post">
               <div class="form-group">
                   <fieldset class="form-group">
+                    <label for="id">Código</label>
+                    <input readonly class="form-control" name="id" id="id" value="${alma.getId()}"/>
+                  </fieldset>
+              </div>
+              <div class="form-group">
+                  <fieldset class="form-group">
                     <label for="nome">Nome</label>
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome do individuo">
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome do individuo" value="${alma.getNome()}"/>
                   </fieldset>
               </div>
               <div class="form-group">
                   <fieldset class="form-group">
                     <label for="pecado">Pecado</label>
-                    <input type="text" class="form-control" name="pecado" id="pecado" placeholder="Pecado">
+                    <input type="text" class="form-control" name="pecado" id="pecado" placeholder="Pecado" value="${alma.getPecado()}">
                   </fieldset>
               </div>
               <div class="form-group">
                 <label for="status">Status</label>
-                  <select class="form-control" name="status" id="status">
-                    <option value="1">Céu</option>
-                    <option value="2">Inferno</option>
+                  <select class="form-control" name="status" id="status" >
+                    <option ${alma.getStatus() == 1 ? "selected='selected'" : ''} value="1">Céu</option>
+                    <option ${alma.getStatus() == 2 ? "selected='selected'" : ''} value="2">Inferno</option>
                   </select>
               </div>
               <div class="form-group" style="float:right;">

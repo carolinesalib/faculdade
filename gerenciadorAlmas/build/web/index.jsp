@@ -5,6 +5,5 @@
     <%@ include file="/menu.html"%>  
 </head>
     <body>
-        <h1>teste</h1>
     </body>
 </html>

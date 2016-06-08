@@ -16,12 +16,14 @@
             <c:if test="${empty resultadoBusca}">
                 <tr>
                 <td colspan="3"><i>Não há almas cadastradas.</i></td>
+                </tr>
             </c:if>   
             <c:forEach var="alma" items="${resultadoBusca}" varStatus="s">
                 <tr>
-                <td><a href="editaAlma?id=${s.index}">${alma.nome}</a></td>
-                <td>${contato.email}</td>
-                <td><a href="removeAlma?id=${s.index}">[X]</a></td>
+                <td><a href="editaAlma?id=${alma.id}">${alma.nome}</a></td>
+                <td>${alma.status == 1 ? "Céu" : "Inferno"}</td>
+                <td>${alma.pecado}</td>
+                </tr>
             </c:forEach>
         </table>
         </div>

@@ -7,7 +7,8 @@
         <%@ include file="/menu.html"%>  
     </head>
     <body>
-        <div style='width:600px; position: absolute; left: 25%;'>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
             <h1>Cadastro de almas</h1>
             <form action="salvaAlma" method="post">
               <div class="form-group">
@@ -36,5 +37,6 @@
               </div>
             </form>
         </div>
+        <div class="col-md-4"></div>
     </body>
 </html>
