@@ -9,7 +9,7 @@
     <body>
         <div style='width:600px; position: absolute; left: 25%;'>
             <h1>Cadastro de almas</h1>
-            <form action="AlmaServlet" method="post">
+            <form action="salvaAlma" method="post">
               <div class="form-group">
                   <fieldset class="form-group">
                     <label for="nome">Nome</label>
