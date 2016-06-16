@@ -1,10 +1,14 @@
 package com.gifu.gifu;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +27,14 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView textViewResponse;
     private ImageView imageResponse;
-    private Button buttonFindGif;
+    private Button buttonProcurar;
+    private Button buttonSalvar;
+    private EditText editTextCategoria;
+
+    private CategoriaData categoriaData;
+
+    private static String[] FROM = {CategoriaTable._ID, CategoriaTable.NOME, CategoriaTable.USUARIO_ID};
+    private static String ORDER_BY = CategoriaTable.NOME + " DESC";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +44,23 @@ public class MainActivity extends AppCompatActivity {
         //Relaciona variáveis locals com componentes visuais
         this.imageResponse = (ImageView) findViewById(R.id.imageView);
         this.textViewResponse = (TextView) findViewById(R.id.textViewResponse);
-        this.buttonFindGif = (Button) findViewById(R.id.buttonProcurarGif);
+        this.buttonProcurar = (Button) findViewById(R.id.buttonProcurarGif);
+        this.buttonSalvar = (Button) findViewById(R.id.buttonSalvarCategoria);
+        this.editTextCategoria = (EditText) findViewById(R.id.editTextCategoria);
 
-        buttonFindGif.setOnClickListener(new View.OnClickListener() {
+        this.categoriaData = new CategoriaData(getApplicationContext());
+
+        buttonProcurar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 findRandomGif();
+            }
+        });
+
+        buttonSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                salvarCategoria();
             }
         });
 
@@ -80,6 +102,42 @@ public class MainActivity extends AppCompatActivity {
         findRandomGif();
     }
 
+    public void salvarCategoria() {
+        SQLiteDatabase db = categoriaData.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(CategoriaTable.NOME, editTextCategoria.getText().toString());
+//        values.put(CategoriaTable.USUARIO_ID, );
+
+        db.insertOrThrow(CategoriaTable.TABLE_NAME, null, values);
+
+        Cursor cursor = getCategorias();
+        showCategorias(cursor);
+    }
+
+    private void showCategorias(Cursor cursor) {
+        StringBuilder builder = new StringBuilder("Eventos salvos:\n");
+        while (cursor.moveToNext()) {
+            long id = cursor.getLong(0);
+            String nome = cursor.getString(1);
+            long idUsuario = cursor.getLong(2);
+
+            builder.append(id).append(": ");
+            builder.append(idUsuario).append(": ");
+            builder.append(nome).append("\n");
+        }
+//        TextView textView = (TextView) findViewById(R.id.text);
+//        textView.setText(builder);
+        System.out.println(builder);
+    }
+
+    private Cursor getCategorias() {
+        SQLiteDatabase db = categoriaData.getReadableDatabase();
+
+        Cursor cursor = db.query(CategoriaTable.TABLE_NAME, FROM, null, null, null, null, ORDER_BY);
+        startManagingCursor(cursor);
+        return cursor;
+    }
     public void setGifIntoImage(String url) {
         Glide.with(this) // replace with 'this' if it's in activity
                 .load(url)
@@ -90,7 +148,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void findRandomGif() {
-        String url = "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC";
+        String url = "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&";
+
+        //Busca por c categoria caso tiver
+        if (!editTextCategoria.getText().equals("")) {
+            url += "tag="+editTextCategoria.getText();
+        }
 
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
             @Override
