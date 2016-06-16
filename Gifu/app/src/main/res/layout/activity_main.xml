@@ -23,30 +23,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Procurar novo gif"
-                android:id="@+id/buttonProcurarGif" />
+                android:background="@drawable/button_selector_procurar"
+                android:id="@+id/buttonProcurarGif"
+                android:textColor="@android:color/background_light" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/edittext_selector"
                 android:id="@+id/editTextCategoria" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Salvar como uma categoria"
-                android:id="@+id/buttonSalvarCategoria" />
+                android:background="@drawable/button_selector_salvar"
+                android:id="@+id/buttonSalvarCategoria"
+                android:textColor="@android:color/background_light" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textViewResponse" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textViewResponse" />
 
             <ImageView
                 android:layout_width="match_parent"

@@ -13,6 +13,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,8 +34,14 @@ public class MainActivity extends AppCompatActivity {
         this.textViewResponse = (TextView) findViewById(R.id.textViewResponse);
         this.buttonFindGif = (Button) findViewById(R.id.buttonProcurarGif);
 
-
         buttonFindGif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findRandomGif();
+            }
+        });
+
+        imageResponse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 findRandomGif();
@@ -80,5 +89,11 @@ public class MainActivity extends AppCompatActivity {
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, responseListener, responseErrorListener);
 
         RestRequestManager.getInstance(MainActivity.this).addToRequestQueue(jsObjRequest);
+    }
+
+    public void zoom(View view){
+//        ImageView image = (ImageView)findViewById(R.id.imageView);
+//        Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.clockwise);
+//        image.startAnimation(animation1);
     }
 }
