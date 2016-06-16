@@ -1,5 +1,6 @@
 package com.gifu.gifu;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -42,9 +43,36 @@ public class MainActivity extends AppCompatActivity {
         });
 
         imageResponse.setOnClickListener(new View.OnClickListener() {
+            int i;
             @Override
             public void onClick(View v) {
-                findRandomGif();
+                // TODO Auto-generated method stub
+                i++;
+                Handler handler = new Handler();
+                Runnable r = new Runnable() {
+
+                    @Override
+                    public void run() {
+                        i = 0;
+                    }
+                };
+
+                if (i == 1) {
+                    //Single click
+                    handler.postDelayed(r, 250);
+                } else if (i == 2) {
+                    //Double click
+                    i = 0;
+                    zoom(v);
+                }
+            }
+        });
+
+        imageResponse.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                clockWise(v);
+                return false;
             }
         });
 
@@ -58,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 .asGif()
 //                .error(R.drawable.) // show error drawable if the image is not a gif
                 .into(this.imageResponse);
+
     }
 
     public void findRandomGif() {
@@ -92,8 +121,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void zoom(View view){
-//        ImageView image = (ImageView)findViewById(R.id.imageView);
-//        Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.clockwise);
-//        image.startAnimation(animation1);
+        ImageView image = (ImageView)findViewById(R.id.imageView);
+        Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom);
+        image.startAnimation(animation1);
     }
+
+    public void clockWise(View view){
+        ImageView image = (ImageView)findViewById(R.id.imageView);
+        Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.clockwise);
+        image.startAnimation(animation1);
+    }
+
+
 }
